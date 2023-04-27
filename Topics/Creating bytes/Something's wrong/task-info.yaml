@@ -1,0 +1,17 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    number = input()
+    bytes_number = number.to_bytes(5, byteorder=little)
+    number_from_bytes = int.from_bytes(bytes_number, 'big')
+    print(bytes_number == number_from_bytes)  # <-- expected to be True!
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15482#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Thu, 27 Apr 2023 07:17:45 UTC"
+record: -1
+submission_language: python3
