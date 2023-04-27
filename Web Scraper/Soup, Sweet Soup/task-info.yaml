@@ -144,6 +144,45 @@ files:
     if __name__ == '__main__':
         WebScraperTest().run_tests()
   learner_created: false
+- name: source.html
+  visible: true
+  text: |
+    <html>
+    <head>
+      <title>warming up</title>
+      <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+    <center>
+    <img src="calc.jpg"><br>
+    <font color="gold">
+    <p>Hint: try to change the URL address.
+    </body>
+    </html>
+  learner_created: true
+- name: Moderna_COVID_vaccine_becomes_second_to_get_US_authorization.txt
+  visible: true
+  text: "A week after granting an emergency-use authorization for the country’s first\
+    \ COVID-19 vaccine, US regulators have followed with a second: another RNA vaccine,\
+    \ this one made by Moderna of Cambridge, Massachusetts."
+  learner_created: true
+- name: Biden’s_pick_to_head_US_environment_agency_heartens_scientists.txt
+  visible: true
+  text: "US president-elect Joe Biden has nominated Michael Regan, North Carolina’\
+    s top environmental regulator, to lead the country’s Environmental Protection\
+    \ Agency (EPA) — and scientists and environmentalists are optimistic."
+  learner_created: true
+- name: Is_lightning_striking_the_Arctic_more_than_ever_before.txt
+  visible: true
+  text: "Lightning is striking the Arctic many times more often than it did a decade\
+    \ ago, a study suggests — and the rate could soon double. The findings demonstrate\
+    \ yet another way Earth’s climate could be changing as the planet warms, although\
+    \ not all researchers agree that the trend is real."
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/11759#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Thu, 27 Apr 2023 17:40:09 UTC"
 record: -1
