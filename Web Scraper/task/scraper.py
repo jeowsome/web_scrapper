@@ -9,7 +9,7 @@ def get_request(url):
 
     if r:
         return r.content
-    return INVALID_REQUEST
+    print(f"The URL returned {r.status_code}!")
 
 
 def process_result(get_result):
@@ -30,7 +30,15 @@ def process_result(get_result):
     return INVALID_REQUEST
 
 
+def save_to_html(content):
+    with open("source.html", "wb") as file:
+        file.write(content)
+
+    print("Content saved.")
+
+
 input_url = input("Input the URL:\n")
 res = get_request(input_url)
-print(process_result(res))
 
+if res:
+    save_to_html(res)
