@@ -1,44 +1,43 @@
 import requests
 from bs4 import BeautifulSoup
-
-INVALID_REQUEST = "Invalid page!"
-
-
-def get_request(url):
-    r = requests.get(url)
-
-    if r:
-        return r.content
-    print(f"The URL returned {r.status_code}!")
+import string
 
 
-def process_result(get_result):
-    result = {}
-    if get_result == INVALID_REQUEST:
-        return get_result
-
-    soup = BeautifulSoup(get_result, 'html.parser')
-
-    if soup.find('title').text and soup.select('meta[name="description"]'):
-        result.update({
-            'title': soup.find('title').text,
-            'description': soup.select_one('meta[name="description"]').get('content')
-        })
-
-    if result.get('title') and result.get('description'):
-        return result
-    return INVALID_REQUEST
+def remove_punctuations(word: string) -> string:
+    return word.translate(str.maketrans('', '', string.punctuation))
 
 
-def save_to_html(content):
-    with open("source.html", "wb") as file:
-        file.write(content)
+def get_filename(word: string) -> string:
+    _name = remove_punctuations(word)
+    filename = string.Template("${name}.txt")
+    _name = _name.replace(" ", "_")
+    return filename.substitute(name=_name)
 
-    print("Content saved.")
+
+def write_content(filename, path):
+    article_page = requests.get(URL.substitute(path=path))
+    page_soup = BeautifulSoup(article_page.content, PARSER_OPTION)
+    content = page_soup.select_one(".article__teaser").text
+    with open(filename, 'wb') as file:
+        file.write(content.encode("utf-8"))
+
+    file_list.append(filename)
 
 
-input_url = input("Input the URL:\n")
-res = get_request(input_url)
+URL = string.Template("https://www.nature.com${path}")
+PARSER_OPTION = "html.parser"
+r = requests.get(URL.substitute(path="/nature/articles?sort=PubDate&year=2020&page=3"))
+soup = BeautifulSoup(r.content, PARSER_OPTION)
+article_list = soup.find_all("article")
+file_list = []
 
-if res:
-    save_to_html(res)
+for article in article_list:
+    meta = article.select_one("div > span[data-test='article.type'] > span.c-meta__type")
+
+    if meta.text == 'News':
+        title_container = article.select_one('[data-track-action="view article"]')
+        title = get_filename(title_container.text)
+        write_content(filename=title, path=title_container.get('href'))
+
+
+print("Saved articles:", file_list)
