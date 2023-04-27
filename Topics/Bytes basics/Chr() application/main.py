@@ -1,0 +1,1 @@
+print(*[chr(int(input())) for _ in range(4)], sep='')
